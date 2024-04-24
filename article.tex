@@ -1,0 +1,224 @@
+% Use llncs and set the depth for the table of contents to 2 (won't show sub-subsections)
+\documentclass[runningheads, a4paper]{llncs}
+\setcounter{tocdepth}{2}
+
+% \usepackage{geometry}
+% \geometry{}
+
+% Biblography
+
+% \usepackage[sorting=nyt,style=apa]{biblatex}
+% \usepackage[style=authoryear]{biblatex}
+% \let \cite \textcite 
+% \usepackage{biblatex}
+\usepackage[sorting=nyt,style=apa]{biblatex}
+% \usepackage{harvard}
+% \usepackage[style=authoryear-ibid]{biblatex})
+\addbibresource{list_included.bib}
+\addbibresource{list_reading.bib}
+% \bibliographystyle{src/splncs04}
+% \bibliography{list_included, list_reading}
+
+% Various packages accrued over previous projects
+\usepackage{graphicx}
+\usepackage[]{hyperref}
+\usepackage[x11names]{xcolor} % xcolor.pdf/4.3 for palettes
+\usepackage[]{todonotes} % This provides text boxes for notes
+\usepackage[]{subcaption} % For subfigures environments https://tex.stackexchange.com/a/282878
+\usepackage[]{caption}
+\usepackage[]{pgfgantt}
+\usepackage[]{changepage} % This provides adjustwidth
+\usepackage{cleveref}
+
+\usepackage[]{lipsum}
+
+% From https://tex.stackexchange.com/a/181233
+\captionsetup[subfigure]{subrefformat=simple,labelformat=simple}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+% \usepackage[title,toc,titletoc,header]{appendix} % Nice appendix sections
+
+
+
+\hypersetup{
+    colorlinks,
+    allcolors=SteelBlue3, % Setup the colour of the reference links
+    % Using '.' sets it to whatever the current text colour is, requires "xcolor"
+    urlcolor=blue,
+}
+
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+\urlstyle{rm} % The above is broken, this works (along with the blue from above)
+% Although it seems that the font doesn't change or is the same
+
+
+% Macros
+
+\let \cite \parencite
+\newcommand \todoask[1]{ \todo[color=MediumOrchid1]{#1} }
+\newcommand \todoaskk[1]{ \todo[color=MediumPurple1]{#1} }
+\newcommand \nt[1] { \textcolor{DeepPink2}{ \textless{}{#1}\textgreater } }
+\newcommand \rf { \textcolor{DeepPink2}{ \textless{}REF?\textgreater } }
+\newcommand \rfq { \textcolor{DeepPink2}{ \textless{}ref maybe?\textgreater } }
+\newcommand \hlchanged[1] { \colorbox{LightSteelBlue1}{\parbox{12cm}{ {#1} }} }
+\newcommand \hldeleted[1] { \colorbox{Firebrick1}{\parbox{12cm}{ {#1} }} }
+
+
+% This macro was taken from here:
+% https://tex.stackexchange.com/questions/173820/how-to-put-a-matrix-of-images#173826
+\newcommand{\subf}[2]{%
+  {\small\begin{tabular}[t]{@{}c@{}}
+  #1\\#2
+  \end{tabular}}%
+}
+
+% This macro was taken from here:
+% https://tex.stackexchange.com/questions/44618/dynamically-count-and-return-number-of-words-in-a-section
+%\newcommand\wordcount{
+%    \immediate\write18{texcount -sub=section \jobname.tex  | grep "Section" | sed -e 's/+.*//' | sed -n \thesection p > 'count.txt'}
+%(\input{count.txt}words)}
+
+
+\begin{document}
+
+    \title{\LaTeX \hspace{0.09em} Simple (\& Hacky) Template} %\thanks{Supported by organization x.}}
+    \subtitle{This is a subtitle}
+    \titlerunning{Shorter title for Simple (\& Hacky) \LaTeX \hspace{0.09em} Template}
+    
+    \author{
+        Author First \inst{1,2} % \and % \orcidID{0000-1111-2222-3333}
+    }
+    % \and
+    %     Second Author\inst{2,3}\orcidID{1111-2222-3333-4444} \and
+    %     Third Author\inst{3}\orcidID{2222--3333-4444-5555}}
+    % %
+    \authorrunning{Author First}
+    % First names are abbreviated in the running head.
+    % If there are more than two authors, 'et al.' is used.
+    %
+    \institute{Institution; \email{email@domain.ac.uk}
+    \and
+    Institution 2; \email{email2@domain.ac.uk}}
+    % \and
+    %     Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany
+    %     \email{lncs@springer.com}\\
+    %     \url{http://www.springer.com/gp/computer-science/lncs} \and
+    %     ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
+    %     \email{\{abc,lncs\}@uni-heidelberg.de}}
+    %
+    \maketitle              % typeset the header of the contribution
+    %
+    \begin{abstract}
+        The abstract should briefly summarize the contents of the paper in
+        15--250 words.
+
+        \keywords{\LaTeX \and Template \and Another keyword.}
+    \end{abstract}
+
+    \tableofcontents
+    \listoffigures
+    \listoftables
+
+    \newpage
+    
+    \section{Boilerplate}
+
+        Here we have a bunch of lorem ipsum text, Fig. \ref{fig:antarctic} showing an antarctic scene (no bears! $\leftarrow$ this is a joke about etymology, see \textcite{antarcticEtymonline,articEtymonline}), and Figure \ref{fig:toriiAndRiver} containing \ref{fig:toriiAndRiver:torii} or \ref{sub@fig:toriiAndRiver:torii} which depicts a torii and \subref{fig:toriiAndRiver:river} depicting a river scene.
+
+        \lipsum[1]
+
+        \begin{figure}[h]
+            \begin{center}
+                \begin{scriptsize}
+                    \vspace{-.5cm}
+                    \begin{adjustwidth}{-0cm}{-0.cm}
+                        \begin{center}
+                            \includegraphics[width=0.5 \linewidth]{images/antarctic-svgrepo-com.svg.eps}
+                        \end{center}
+                    \end{adjustwidth}
+                \end{scriptsize}
+                \vspace{-.0cm}
+                \caption{Antarctic Scene}{A vector graphic scene from \href[]{https://www.svgrepo.com/}{svgrepo.com} picturing an antarctic research station}
+                \label{fig:antarctic}
+            \end{center}
+            \vspace{-0.6cm}
+        \end{figure}
+
+
+        \begin{figure}
+            \begin{center}
+                \begin{subfigure}[h]{0.4 \linewidth}
+                    \includegraphics[width=\linewidth]{images/shinto-japan-svgrepo-com.svg.eps}
+                    \caption{Shinto torii scene}
+                    \label{fig:toriiAndRiver:torii}
+                \end{subfigure}
+                \hfill
+                \begin{subfigure}[h]{0.4 \linewidth}
+                    \includegraphics[width=\linewidth]{images/landscape-river-svgrepo-com.svg.eps}
+                    \caption{River landscape scene}
+                    \label{fig:toriiAndRiver:river}
+                \end{subfigure}
+                \caption{Torii and River Scenes}{Two side-by-side vector graphics converted to Encapsulated PostScript format from \href[]{https://www.svgrepo.com/}{svgrepo.com} showing both \subref{fig:toriiAndRiver:torii} a torii and \subref{fig:toriiAndRiver:river} a river scene}
+                \label{fig:toriiAndRiver}
+            \end{center}
+            \vspace{-0.6cm}
+        \end{figure}
+
+        \lipsum[2]
+
+        \lipsum[3]
+
+    \section{Table Section}
+        
+        \begin{table}
+            \begin{adjustwidth}{-1cm}{-1cm}
+                \begin{tabular}{|| l | c | r | p{8cm} ||}
+                    Left-aligned & Centred & Right-aligned & 8cm Paragraph \\
+                    \hline
+                    Nunc & eleifend & consequant & Donec bibendum quam in tellus. \\
+                    Nam & ipsum & ligula & Quisque ullamcorper placerat ipsum. Cras nibh. Morbi vel justo vitae lacus tin-cidunt ultrices. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \\
+                    Proin & tempus & nibh & Aenean placerat. \\
+                \end{tabular}
+            \end{adjustwidth}
+                
+            % Give a bit of a margin to the table
+            \vspace{0.25cm}
+
+            \begin{center}
+                \caption{A Table}{This is a table, with a short caption, this caption and a label}
+                \label{tab:aTable}
+            \end{center}
+        \end{table}
+
+    \section{Subsection Section}
+
+        \lipsum[4]
+        
+        \subsection{A Very Important Subsection}
+
+            \lipsum[5]
+
+            \subsubsection{An even more important sub sub-section}
+
+                \lipsum[6]
+
+                \vspace{-0.5cm} % You can also overlap sections if you don't like your reader
+                Note that sub-subsections aren't included in the TOC with a TOC depth of "2", "3" is needed. See Table \ref{tab:aTable}.
+
+
+    %\pagebreak
+    \newpage
+    
+    %
+    % ---- Bibliography ----
+    %
+    % BibTeX users should specify bibliography style 'splncs04'.
+    % References will then be sorted and formatted in the correct style.
+    %
+
+    % \bibliographystyle{src/splncs04}
+    \printbibliography
+
+    
+\end{document}
